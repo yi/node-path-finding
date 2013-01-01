@@ -8,7 +8,7 @@
     , "main"            : "./index.js"
     , "dependencies"    : {
       "heap" : "0.2.1"
-      , "node-simple-logger"          : ">= 0.1.0"
+      , "dev-logger"          : ">= 0.1.0"
     }
   , "devDependencies" : {
     "uglify-js"       : ">= 1.2.5"

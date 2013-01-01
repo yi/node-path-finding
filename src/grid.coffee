@@ -1,8 +1,23 @@
-logger = require "logger"
-Buffer = require "Buffer"
 
 
 class Grid
+
+
+  @bytesFrom2DArray : (width, height, array2d) ->
+    buf = new Buffer(Math.ceil(width * height / 8))
+    buf.fill(0) # fill all bits as false
+    for row, y in array2d
+      for col, x in row
+        if Boolean(col) # set bit only when true
+          index = y * width + x
+          byteIndex = Math.ceil(index / 8)
+          offset = index % 8
+          byte = buf[byteIndex]
+          byte = byte ^ 1 << offset
+          buf[byteIndex] = byte
+
+    return buf
+
 
   constructor: (@width, @height, @bytes) ->
     unless width > 0 and height > 0 and Buffer.isBuffer(bytes)
