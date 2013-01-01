@@ -1,0 +1,27 @@
+{
+  "name"            : "node-pathfinding"
+    , "version"         : "0.1.0"
+    , "description"     : "node-pathfinding"
+    , "homepage"        : "https://github.com/yi/node-path-finding"
+    , "keywords"        : ["algorithm", "game", "pathfinding"]
+    , "author"          : "Yi<yi2004@gmail.com>"
+    , "main"            : "./index.js"
+    , "dependencies"    : {
+      "heap" : "0.2.1"
+    }
+  , "devDependencies" : {
+    "uglify-js"       : ">= 1.2.5"
+      , "colors"          : "0.6.x"
+      , "browserify"      : "1.10.8"
+      , "mocha"           : "1.0.x"
+      , "should"          : "0.6.x"
+  }
+  , "repository"      : {
+    "type"          : "git"
+      , "url"           : "git://github.com/yi/node-path-finding.git"
+  }
+  , "licenses"        : [{
+    "type"          :  "MIT"
+      , "url"           : "http://opensource.org/licenses/mit-license.php"
+  }]
+}

@@ -1,0 +1,2 @@
+mkdir -p lib/
+coffee -o lib/ -cw src/
