@@ -37,8 +37,8 @@ class Grid
   isWalkableAt : (x, y) ->
     return false if x < 0 or y < 0 or x > @width or y > @height # out bound
     index = (y * @width + x)
-    bytePos = Math.ceil(index % 3)  #todo: optimise
-    offset = index % 8
+    bytePos = index >>> 3
+    offset = 7 - index % 8
     byte = @bytes[bytePos]
     return Boolean(byte >>> offset & 1)
 
@@ -49,5 +49,17 @@ class Grid
 
     return neighbors
 
+
+  # print out the block data for human inspection
+  toString : ->
+    result = "[Grid(width=#{@width}, height=#{@height})]\nDump: 1=walkable, 0=blocked"
+    for y in [0...@height] by 1
+      arr = []
+      for x in [0...@width] by 1
+        arr.push Number(@isWalkableAt(x,y))
+      result = result + "\n#{arr.join ''}"
+    return result
+
 module.exports = Grid
+
 
