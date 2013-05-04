@@ -22,6 +22,8 @@ grid = new Grid(width, height, buf)
 console.log "grid: #{grid}"
 
 
+return
+
 data = fixture[378]
 console.dir data
 
@@ -61,10 +63,6 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
   checkEveryPoint()
 
   return
-
-
-
-
 
 
 describe "Static method in Grid", ->

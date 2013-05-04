@@ -3,7 +3,15 @@
 class Grid
 
 
+  # generate a map buffer from the given 2d array
+  # @param {uint} width of the map
+  # @param {uint} height of the map
+  # @param {Array[Array]} 2D map array
   @bytesFrom2DArray : (width, height, array2d) ->
+    if isNaN(width) or width <= 0 or isNaN(height) or height <= 0 or not Array.isArray(array2d)
+      console.log "ERROR [grid$::bytesFrom2DArray] bad arguments, width:#{width}, height:#{height}, array2d:#{array2d}"
+      return null
+
     buf = new Buffer(Math.ceil(width * height / 8))
     console.log "len:#{buf.length}"
     buf.fill(0) # fill all bits as false
@@ -17,7 +25,7 @@ class Grid
           byte = buf[byteIndex]
           byte = byte ^ 1 << offset
           buf[byteIndex] = byte
-          console.log "walkable at row:#{y}, col:#{x}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
+          console.log "[grid$::bytesFrom2DArray] walkable at row:#{y}, col:#{x}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
     return buf
 
 
@@ -122,11 +130,11 @@ class Grid
   # print out the block data for human inspection
   # @return {String} a string describe this instance
   toString : ->
-    result = "[Grid(width=#{@width}, height=#{@height})]\nDump: 1=walkable, 0=blocked"
+    result = "[Grid(width=#{@width}, height=#{@height})]\nDump: ░=walkable, ▓=blocked"
     for y in [0...@height] by 1
       arr = []
       for x in [0...@width] by 1
-        arr.push Number(@isWalkableAt(x,y))
+        arr.push(if @isWalkableAt(x,y) then "░" else "▓")
       result = result + "\n#{arr.join ''}"
     return result
 
