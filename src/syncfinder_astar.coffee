@@ -74,17 +74,19 @@ syncfinder_astar =
     while(openList.isNotEmpty())
       # pop the position of node which has the minimum `f` value.
       node = openList.pop()
-      console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{node >> 16}, y:#{node & 0xffff}"
 
       locToClosed[node] = true
 
       if node is endLoc
+        console.log "[syncfinder_astar::findPath] hit end brick"
         return backtrace(node)
 
       # get neighbors of the current node
       nodeX = node >>> 16
       nodeY = node & 0xffff
       neighbors = grid.getNeighbors(nodeX , nodeY)
+
+      console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{nodeX}, y:#{nodeY}, neighbors:#{neighbors}"
 
       for i in [0..neighbors.length]
         neighbor = neighbors[i]
@@ -96,7 +98,6 @@ syncfinder_astar =
         # get the distance between current node and the neighbor
         # and calculate the next g score
         ng = locToG[node] + (if x is nodeX or y is nodeY then 1 else SQRT2)
-
 
         # check if the neighbor has not been inspected yet, or
         # can be reached with smaller cost from the current node
