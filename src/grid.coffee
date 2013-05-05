@@ -25,7 +25,7 @@ class Grid
           byte = buf[byteIndex]
           byte = byte ^ 1 << offset
           buf[byteIndex] = byte
-          console.log "[grid$::bytesFrom2DArray] walkable at x:#{x}, y:#{y}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
+          #console.log "[grid$::bytesFrom2DArray] walkable at x:#{x}, y:#{y}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
     return buf
 
 
@@ -140,11 +140,12 @@ class Grid
   # @return {String} a string describe this instance
   toString : (startLoc, endLoc, path)->
     markpoints = {}
-    markpoints[startLoc] = "S" unless isNaN(startLoc)
-    markpoints[endLoc] = "E" unless isNaN(endLoc)
     if Array.isArray(path)
       for brickLoc, i in path
         markpoints[brickLoc] = i % 10
+
+    markpoints[startLoc] = "S" unless isNaN(startLoc)
+    markpoints[endLoc] = "E" unless isNaN(endLoc)
 
     result = "[Grid(width=#{@width}, height=#{@height})]\nDump: ░=walkable, ▓=blocked"
     for y in [0...@height] by 1

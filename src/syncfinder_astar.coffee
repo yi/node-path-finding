@@ -31,6 +31,8 @@ heuristic = (dx, dy) ->
 # @param {uint} node End node
 # @return the path array
 backtrace = (node) ->
+  console.log "[syncfinder_astar::backtrace] node:#{node}"
+
   path = []
   path.push(node)
   while (locToParent[node])
@@ -58,6 +60,7 @@ syncfinder_astar =
     locToH = {}
     locToParent = {}
 
+    console.log "[syncfinder_astar::findPath] startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}, theGrid:#{theGrid.toString(startLoc, endLoc)}"
 
     # set the `g` and `f` value of the start node to be 0
     locToG[startLoc] = 0
@@ -71,6 +74,8 @@ syncfinder_astar =
     while(openList.isNotEmpty())
       # pop the position of node which has the minimum `f` value.
       node = openList.pop()
+      console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{node >> 16}, y:#{node & 0xffff}"
+
       locToClosed[node] = true
 
       if node is endLoc
