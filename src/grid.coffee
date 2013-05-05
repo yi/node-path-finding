@@ -14,18 +14,18 @@ class Grid
 
     buf = new Buffer(Math.ceil(width * height / 8))
     console.log "len:#{buf.length}"
-    buf.fill(1) # fill all bits as blocked
+    buf.fill(255) # fill all bits as blocked
 
     for row, y in array2d
       for col, x in row
-        if Boolean(col) # set bit only when true
+        unless Boolean(col) # 0: means walkable
           index = y * width + x
           byteIndex = index >>> 3
           offset = 7 - (index % 8) #从高位向低位写
           byte = buf[byteIndex]
           byte = byte ^ 1 << offset
           buf[byteIndex] = byte
-          console.log "[grid$::bytesFrom2DArray] walkable at row:#{y}, col:#{x}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
+          console.log "[grid$::bytesFrom2DArray] walkable at x:#{x}, y:#{y}, row:#{row}, index:#{index}, offset:#{offset}, byteIndex:#{byteIndex}"
     return buf
 
 
@@ -79,7 +79,11 @@ class Grid
   # @return {uint[]} a list of walkable neighbors brick loc
   getNeighbors : (x, y, allowDiagonal=true, dontCrossCorners=false) ->
     #console.log  x, y, allowDiagonal, dontCrossCorners
-    return [] if x < 0 or y < 0 or x >= @width or y >= @height # out bound
+    return null if x < 0 or y < 0 or x >= @width or y >= @height # out bound
+    # TODO:
+    #   should return null when brick is blocked?
+    # ty 2013-05-05
+
     neighbors = []
 
     # ↑
@@ -130,13 +134,26 @@ class Grid
     return neighbors
 
   # print out the block data for human inspection
+  # @param {uint} startLoc the start brick loc
+  # @param {uint} endLoc the end brick loc
+  # @param {uint[]} path array of point
   # @return {String} a string describe this instance
-  toString : ->
+  toString : (startLoc, endLoc, path)->
+    markpoints = {}
+    markpoints[startLoc] = "S" unless isNaN(startLoc)
+    markpoints[endLoc] = "E" unless isNaN(endLoc)
+    if Array.isArray(path)
+      for brickLoc, i in path
+        markpoints[brickLoc] = i % 10
+
     result = "[Grid(width=#{@width}, height=#{@height})]\nDump: ░=walkable, ▓=blocked"
     for y in [0...@height] by 1
       arr = []
       for x in [0...@width] by 1
-        arr.push(if @isWalkableAt(x,y) then "░" else "▓")
+        if markpoints[x << 16 | y] isnt undefined
+          arr.push(markpoints[x << 16 | y])
+        else
+          arr.push(if @isWalkableAt(x,y) then "░" else "▓")
       result = result + "\n#{arr.join ''}"
     return result
 

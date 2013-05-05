@@ -16,7 +16,17 @@ width = 3
 height = 5
 buf = Grid.bytesFrom2DArray(width, height, array2d)
 grid = new Grid(width, height, buf)
+
+# print out the grid
 console.log "grid: #{grid}"
+
+
+for y in [0...height]
+  for x in [0...width]
+    neighbors = grid.getNeighbors(x, y)
+    console.log "neighbors@x:#{x}, y:#{y}, neighbors:#{neighbors}, #{grid.toString(x << 16 | y, null, neighbors)}"
+
+return
 
 # building a map buffer from compressed bytes
 data = fixture[378]
