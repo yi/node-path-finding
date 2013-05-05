@@ -40,7 +40,14 @@ backtrace = (node) ->
 
 syncfinder_astar =
 
+  # find a path of giving x, y brick locations
   findPath : (startX, startY, endX, endY, theGrid) ->
+
+    # validate arguments
+    if isNaN(startX) or startX < 0 or isNaN(startY) or startY < 0 or isNaN(endX) or endX < 0 or isNaN(endY) or endY < 0 or not theGrid
+      console.log "ERROR [syncfinder_astar::findPath] bad arguments, startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}, theGrid:#{theGrid}"
+      return null
+
     startLoc = startX << 16 | startY
     endLoc = endX << 16 | endY
     grid = theGrid

@@ -63,7 +63,6 @@ class Heap
       return lastelt
     return returnitem
 
-
   # reset the heap
   # @param {Object} locToF, a key-value hash
   reset : (locToF) ->
