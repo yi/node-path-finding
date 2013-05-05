@@ -1,3 +1,4 @@
+
 Grid = require "../grid"
 fixture = require "./fixture"
 zlib = require 'zlib'
@@ -30,32 +31,6 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
   grid = new Grid(data.width, data.height, buf)
 
   console.log "grid2: #{grid}"
-
-  return
-  x = 0
-  y = 0
-
-  brickLocToString = (brickLoc) ->
-    return "(#{brickLoc >>> 16}, #{brickLoc & 0xffff})"
-
-
-  checkEveryPoint = ->
-    neighbors = grid.getNeighbors(x, y)
-    console.log "[grid_test::checkEveryPoint] x:#{x}, y:#{y}, walkable:#{grid.isWalkableAt(x,y)}, neighbors:#{neighbors.map(brickLocToString)}"
-    #console.log "[grid_test::checkEveryPoint] x:#{x}, y:#{y}, walkable:#{grid.isWalkableAt(x,y)}, neighbors:#{neighbors}"
-    ++x
-    if x >= data.width
-      x = 0
-      ++ y
-    if y < data.height then process.nextTick ->
-      checkEveryPoint()
-    return
-
-
-  #console.log grid.isWalkableAt 0, 95
-  #console.log grid.getNeighbors 0, 95
-
-  checkEveryPoint()
 
   return
 

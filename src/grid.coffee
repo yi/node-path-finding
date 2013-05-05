@@ -1,12 +1,12 @@
 
-
+# an data representation of the map grid, on which path finding occurs
 class Grid
 
 
   # generate a map buffer from the given 2d array
   # @param {uint} width of the map
   # @param {uint} height of the map
-  # @param {Array[Array]} 2D map array
+  # @param {Array[Array]} 2D map array,  1: means blocked, 0: means walkable
   @bytesFrom2DArray : (width, height, array2d) ->
     if isNaN(width) or width <= 0 or isNaN(height) or height <= 0 or not Array.isArray(array2d)
       console.log "ERROR [grid$::bytesFrom2DArray] bad arguments, width:#{width}, height:#{height}, array2d:#{array2d}"
@@ -14,11 +14,11 @@ class Grid
 
     buf = new Buffer(Math.ceil(width * height / 8))
     console.log "len:#{buf.length}"
-    buf.fill(0) # fill all bits as false
+    buf.fill(1) # fill all bits as blocked
 
     for row, y in array2d
       for col, x in row
-        unless Boolean(col) # set bit only when true
+        if Boolean(col) # set bit only when true
           index = y * width + x
           byteIndex = index >>> 3
           offset = 7 - (index % 8) #从高位向低位写
@@ -29,6 +29,10 @@ class Grid
     return buf
 
 
+  # constructor function
+  # @param {uint} width of the map grid
+  # @param {uint} height of the map grid
+  # @param {Buffer} bytes of the map grid,  1: means blocked, 0: means walkable
   constructor: (@width, @height, @bytes) ->
     unless width > 0 and height > 0 and Buffer.isBuffer(bytes)
       throw new Error "bad arguments, width:#{width}, height:#{height}, bytes:#{bytes}"
@@ -53,25 +57,25 @@ class Grid
     # ty 2013-01-03
     return not Boolean(byte >>> offset & 1)
 
-# @return {uint[]} each uint present x(high 16 bit) and y(low 16 bit)
-# Get the neighbors of the given node.
-#
-#     offsets      diagonalOffsets:
-#   +---+---+---+    +---+---+---+
-#   |   | 0 |   |    | 0 |   | 1 |
-#   +---+---+---+    +---+---+---+
-#   | 3 |   | 1 |    |   |   |   |
-#   +---+---+---+    +---+---+---+
-#   |   | 2 |   |    | 3 |   | 2 |
-#   +---+---+---+    +---+---+---+
-#
-#   When allowDiagonal is true, if offsets[i] is valid, then
-#   diagonalOffsets[i] and
-#   diagonalOffsets[(i + 1) % 4] is valid.
-#  @param {uint}  x
-#  @param {uint}  y
-#  @param {boolean} allowDiagonal
-#  @param {boolean} dontCrossCorners
+  # @return {uint[]} each uint present x(high 16 bit) and y(low 16 bit)
+  # Get the neighbors of the given node.
+  #
+  #     offsets      diagonalOffsets:
+  #   +---+---+---+    +---+---+---+
+  #   |   | 0 |   |    | 0 |   | 1 |
+  #   +---+---+---+    +---+---+---+
+  #   | 3 |   | 1 |    |   |   |   |
+  #   +---+---+---+    +---+---+---+
+  #   |   | 2 |   |    | 3 |   | 2 |
+  #   +---+---+---+    +---+---+---+
+  #
+  # When allowDiagonal is true, if offsets[i] is valid, then
+  # diagonalOffsets[i] and
+  # diagonalOffsets[(i + 1) % 4] is valid.
+  # @param {uint}  x
+  # @param {uint}  y
+  # @param {boolean} allowDiagonal
+  # @param {boolean} dontCrossCorners
   # @return {uint[]} a list of walkable neighbors brick loc
   getNeighbors : (x, y, allowDiagonal=true, dontCrossCorners=false) ->
     #console.log  x, y, allowDiagonal, dontCrossCorners
@@ -124,8 +128,6 @@ class Grid
     if (d3 && @isWalkableAt(x - 1, y + 1)) then neighbors.push((x - 1) << 16 | (y + 1))
 
     return neighbors
-
-
 
   # print out the block data for human inspection
   # @return {String} a string describe this instance
