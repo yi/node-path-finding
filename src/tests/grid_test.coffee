@@ -2,7 +2,7 @@ Grid = require "../grid"
 fixture = require "./fixture"
 zlib = require 'zlib'
 
-
+# test building a map buffer from 2d array
 array2d = [
   [1, 0, 0],
   [0, 1, 0],
@@ -12,18 +12,12 @@ array2d = [
 ]
 
 width = 3
-
 height = 5
-
 buf = Grid.bytesFrom2DArray(width, height, array2d)
-
 grid = new Grid(width, height, buf)
-
 console.log "grid: #{grid}"
 
-
-return
-
+# building a map buffer from compressed bytes
 data = fixture[378]
 console.dir data
 
@@ -37,6 +31,7 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
 
   console.log "grid2: #{grid}"
 
+  return
   x = 0
   y = 0
 
@@ -65,14 +60,10 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
   return
 
 
-describe "Static method in Grid", ->
+return
 
-  it "should work" , (done) ->
 
-    #for i in [0...buf.length] by 1
-      #console.log "[grid_test] buf[i]:#{buf[i].toString(2)}"
 
-    return
 
 
 
