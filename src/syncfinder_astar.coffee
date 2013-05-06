@@ -88,9 +88,10 @@ syncfinder_astar =
 
       console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{nodeX}, y:#{nodeY}, neighbors:#{neighbors}"
 
-      for i in [0..neighbors.length]
-        neighbor = neighbors[i]
-        continue if locToClosed[neighbor]
+      for neighbor in neighbors
+        if locToClosed[neighbor]
+          console.log "[syncfinder_astar::findPath] met closed node@#{neighbor}, x:#{neighbor >>> 16}, y:#{neighbor&0xffff}"
+          continue
 
         x = neighbor >>> 16
         y = neighbor & 0xffff
@@ -98,17 +99,18 @@ syncfinder_astar =
         # get the distance between current node and the neighbor
         # and calculate the next g score
         ng = locToG[node] + (if x is nodeX or y is nodeY then 1 else SQRT2)
+        console.log "[syncfinder_astar::findPath] ng:#{ng}, locToOpen[neighbor]:#{locToOpen[neighbor]}, locToG[neighbor]:#{locToG[neighbor]}, node:#{node}"
 
         # check if the neighbor has not been inspected yet, or
         # can be reached with smaller cost from the current node
-        if not locToOpen[neighbor] or ng < locToG[neighbor]
+        if (not locToOpen[neighbor]) or (ng < locToG[neighbor])
           locToG[neighbor] = ng
           locToH[neighbor] = locToH[neighbor] or  heuristic(Math.abs(x - endX) , Math.abs(y - endY))
           locToF[neighbor] = locToG[neighbor] + locToH[neighbor]
           neighborNode = x << 16 | y
           locToParent[neighborNode] = node
 
-          if not locToOpen[neighbor]
+          unless locToOpen[neighbor]
             openList.push(neighborNode)
             locToOpen[neighbor] = true
           else

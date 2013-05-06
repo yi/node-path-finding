@@ -1,4 +1,3 @@
-
 # an data representation of the map grid, on which path finding occurs
 class Grid
 

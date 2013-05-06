@@ -1,4 +1,3 @@
-
 Grid = require "../grid"
 fixture = require "./fixture"
 zlib = require 'zlib'
