@@ -16,14 +16,14 @@ chkGetNeighbors = (width, height, grid) ->
 
 # test building a map buffer from 2d array
 array2d = [
-  [1, 0, 0],
-  [0, 1, 0],
-  [0, 0, 1],
-  [1, 1, 0],
-  [1, 0, 0]
+  [1, 0, 0, 0],
+  [0, 1, 0, 0],
+  [0, 0, 1, 0],
+  [1, 1, 0, 0],
+  [1, 0, 0, 0]
 ]
 
-width = 3
+width = 4
 height = 5
 buf = Grid.bytesFrom2DArray(width, height, array2d)
 grid = new Grid(width, height, buf)
@@ -33,6 +33,7 @@ grid = new Grid(width, height, buf)
 path = syncfinder_astar.findPath(1,0,1,4,grid)
 console.log "path:#{path}"
 
+console.log "path on grid :#{grid.toString(1<<16|0, 1<<16|4, path)}"
 return
 
 # building a map buffer from compressed bytes
