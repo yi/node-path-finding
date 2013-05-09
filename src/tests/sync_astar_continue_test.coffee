@@ -5,7 +5,8 @@ syncfinder_astar = require "../syncfinder_astar"
 
 
 # building a map buffer from compressed bytes
-data = fixture[378]
+#data = fixture[378]
+data = fixture[395]
 console.dir data
 
 grid = null
@@ -14,6 +15,7 @@ countSuccess = 0
 countFailure = 0
 countTimes = 0
 totalMsSpent = 0
+maxMSSpent = 0
 
 # uncompress block data
 zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
@@ -43,8 +45,9 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
       ++countFailure
 
     totalMsSpent += msSpent
+    maxMSSpent = msSpent if msSpent > maxMSSpent
     console.log "find path, ms spent:#{msSpent}: path: #{grid.toString(start, end, path)}"
-    console.log "Test times: #{countTimes}, succeed:#{countSuccess}, failed:#{countFailure}, ms:#{msSpent}, avg. ms:#{totalMsSpent / countTimes}"
+    console.log "Test times: #{countTimes}, succeed:#{countSuccess}, failed:#{countFailure}, ms:#{msSpent}, max:#{maxMSSpent}, avg. ms:#{totalMsSpent / countTimes}"
     return
   , 500
 
