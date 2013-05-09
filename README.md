@@ -13,12 +13,12 @@ This module is designed to be run on the server side
 - Doesn't support nagtive location
 
 ## Glossary
-- BrickLoc: To reduce memory usage and use less Object instance, each dot(node, point) in the give map is represented by an 32bit uint, which is composed by ` x << 16 | y `
+- BrickLoc: To reduce memory usage and use less Object instances, each dot(node, point) in the given map is represented by an 32bit uint, which is composed by ` x << 16 | y `
 - Map Buffer: The map is presented by a Buffer, column by row. Each dot(node, point) is a bit in the Buffer. 0 means walkable, 1 means blocked.
 
 ## How To Use
 
-```
+```coffee
 # test building a map buffer from 2d array
 array2d = [
   [1, 0, 0, 0],
