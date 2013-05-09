@@ -1,24 +1,37 @@
 {
-  "name"            : "node-pathfinding"
-    , "version"         : "0.2.0"
-    , "description"     : "a simple server side path finding module for NodeJS, written in CoffeeScript"
-    , "homepage"        : "https://github.com/yi/node-path-finding"
-    , "keywords"        : ["algorithm", "game", "pathfinding"]
-    , "author"          : "Yi<yi2004@gmail.com>"
-    , "main"            : "./index.js"
-    , "dependencies"    : {
-    }
-  , "devDependencies" : {
-  }
-  , "engines": {
+  "name": "node-pathfinding",
+  "version": "0.2.0",
+  "description": "a simple server side path finding module for NodeJS, written in CoffeeScript",
+  "homepage": "https://github.com/yi/node-path-finding",
+  "keywords": [
+    "algorithm",
+    "game",
+    "pathfinding"
+  ],
+  "author": "Yi <yi2004@gmail.com>",
+  "main": "./lib/syncfinder_astar.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
     "node": ">=0.8.0"
-  }
-  , "repository"      : {
-    "type"          : "git"
-      , "url"           : "git://github.com/yi/node-path-finding.git"
-  }
-  , "licenses"        : [{
-    "type"          :  "MIT"
-      , "url"           : "http://opensource.org/licenses/mit-license.php"
-  }]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yi/node-path-finding.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "readmeFilename": "README.md",
+  "gitHead": "3bed7c97aa2361dc1c22524d14b1aef57e5bbd32",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "BSD"
 }
