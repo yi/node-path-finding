@@ -31,7 +31,7 @@ heuristic = (dx, dy) ->
 # @param {uint} node End node
 # @return the path array
 backtrace = (node) ->
-  console.log "[syncfinder_astar::backtrace] node:#{node}"
+  #console.log "[syncfinder_astar::backtrace] node:#{node}"
 
   path = []
   path.push(node)
@@ -41,6 +41,9 @@ backtrace = (node) ->
   return path
 
 syncfinder_astar =
+
+  findPathByBrickLoc : (start, end, theGrid) ->
+    return syncfinder_astar.findPath(start >>> 16 , start & 0xffff, end >>> 16, end & 0xffff, theGrid)
 
   # find a path of giving x, y brick locations
   findPath : (startX, startY, endX, endY, theGrid) ->
@@ -60,7 +63,7 @@ syncfinder_astar =
     locToH = {}
     locToParent = {}
 
-    console.log "[syncfinder_astar::findPath] startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}, theGrid:#{theGrid.toString(startLoc, endLoc)}"
+    console.log "[syncfinder_astar::findPath] startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}" #,theGrid:#{theGrid.toString(startLoc, endLoc)}"
 
     # set the `g` and `f` value of the start node to be 0
     locToG[startLoc] = 0
@@ -78,7 +81,7 @@ syncfinder_astar =
       locToClosed[node] = true
 
       if node is endLoc
-        console.log "[syncfinder_astar::findPath] hit end brick"
+        #console.log "[syncfinder_astar::findPath] hit end brick"
         return backtrace(node)
 
       # get neighbors of the current node
@@ -86,11 +89,11 @@ syncfinder_astar =
       nodeY = node & 0xffff
       neighbors = grid.getNeighbors(nodeX , nodeY)
 
-      console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{nodeX}, y:#{nodeY}, neighbors:#{neighbors}"
+      #console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{nodeX}, y:#{nodeY}, neighbors:#{neighbors}"
 
       for neighbor in neighbors
         if locToClosed[neighbor]
-          console.log "[syncfinder_astar::findPath] met closed node@#{neighbor}, x:#{neighbor >>> 16}, y:#{neighbor&0xffff}"
+          #console.log "[syncfinder_astar::findPath] met closed node@#{neighbor}, x:#{neighbor >>> 16}, y:#{neighbor&0xffff}"
           continue
 
         x = neighbor >>> 16
@@ -99,7 +102,7 @@ syncfinder_astar =
         # get the distance between current node and the neighbor
         # and calculate the next g score
         ng = locToG[node] + (if x is nodeX or y is nodeY then 1 else SQRT2)
-        console.log "[syncfinder_astar::findPath] ng:#{ng}, locToOpen[neighbor]:#{locToOpen[neighbor]}, locToG[neighbor]:#{locToG[neighbor]}, node:#{node}"
+        #console.log "[syncfinder_astar::findPath] ng:#{ng}, locToOpen[neighbor]:#{locToOpen[neighbor]}, locToG[neighbor]:#{locToG[neighbor]}, node:#{node}"
 
         # check if the neighbor has not been inspected yet, or
         # can be reached with smaller cost from the current node

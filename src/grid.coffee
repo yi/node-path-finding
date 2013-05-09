@@ -132,6 +132,14 @@ class Grid
 
     return neighbors
 
+  # @return {uint} a walkable brick location
+  getARandomWalkableBrick : ->
+    loop
+      x = (Math.random() * @width) >>> 0
+      y = (Math.random() * @height) >>> 0
+      return x << 16 | y if @isWalkableAt(x,y)
+
+
   # print out the block data for human inspection
   # @param {uint} startLoc the start brick loc
   # @param {uint} endLoc the end brick loc

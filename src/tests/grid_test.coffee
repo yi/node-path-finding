@@ -34,7 +34,6 @@ path = syncfinder_astar.findPath(1,0,1,4,grid)
 console.log "path:#{path}"
 
 console.log "path on grid :#{grid.toString(1<<16|0, 1<<16|4, path)}"
-return
 
 # building a map buffer from compressed bytes
 data = fixture[378]
@@ -49,6 +48,17 @@ zlib.inflate new Buffer(data['blockdata'],'base64'), (err, buf) ->
   grid = new Grid(data.width, data.height, buf)
 
   console.log "grid2: #{grid}"
+
+
+  start = grid.getARandomWalkableBrick()
+  end = grid.getARandomWalkableBrick()
+
+  now = Date.now()
+  path = syncfinder_astar.findPathByBrickLoc(start, end, grid)
+  msSpent = Date.now() - now
+
+  console.log "find path, ms spent:#{msSpent}: path: #{grid.toString(start, end, path)}"
+
 
   return
 
