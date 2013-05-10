@@ -27,7 +27,7 @@ npm install node-pathfinding
 ## How To Use
 
 ```coffee
-pathfinding = require "../../index"
+pathfinding = require "node-pathfinding"
 
 # test building a map buffer from 2d array
 array2d = [
