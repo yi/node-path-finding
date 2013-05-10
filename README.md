@@ -3,6 +3,14 @@
 Is is a simple path finding module for NodeJS.
 This module is designed to be run on the server side
 
+
+## Installation
+
+```
+npm install node-pathfinding
+```
+
+
 ## Advantages
 - This module use much less runtime memory then other node path finding module I can find on the net
 - The path finding implementation uses primative JavaScript Number type, so much safe to memory leak
@@ -19,6 +27,8 @@ This module is designed to be run on the server side
 ## How To Use
 
 ```coffee
+pathfinding = require "../../index"
+
 # test building a map buffer from 2d array
 array2d = [
   [1, 0, 0, 0],
@@ -30,12 +40,18 @@ array2d = [
 
 width = 4
 height = 5
-buf = Grid.bytesFrom2DArray(width, height, array2d)
-grid = new Grid(width, height, buf)
 
-path = syncfinder_astar.findPath(1,0,1,4,grid)
-console.log "list the path:#{path}"
-console.log "print out the path on map :#{grid.toString(1<<16|0, 1<<16|4, path)}"
+# convert array map into grid buffer
+buf = pathfinding.bytesFrom2DArray(width, height, array2d)
+
+# build grid from grid buffer
+grid = pathfinding.buildGrid(width, height, buf)
+
+# find path
+path = pathfinding.findPath(1,0,1,4,grid)
+
+console.log "path:#{path}"
+console.log "path on grid :#{grid.toString(1<<16|0, 1<<16|4, path)}"
 ```
 
 

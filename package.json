@@ -1,6 +1,6 @@
 {
   "name": "node-pathfinding",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a simple server side path finding module for NodeJS, written in CoffeeScript",
   "homepage": "https://github.com/yi/node-path-finding",
   "keywords": [
@@ -9,7 +9,7 @@
     "pathfinding"
   ],
   "author": "Yi <yi2004@gmail.com>",
-  "main": "./lib/syncfinder_astar.js",
+  "main": "./index.js",
   "dependencies": {},
   "devDependencies": {
     "memwatch" : ">=0"
