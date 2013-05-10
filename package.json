@@ -11,7 +11,9 @@
   "author": "Yi <yi2004@gmail.com>",
   "main": "./lib/syncfinder_astar.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "memwatch" : ">=0"
+  },
   "engines": {
     "node": ">=0.8.0"
   },
@@ -35,3 +37,5 @@
   },
   "license": "BSD"
 }
+
+
