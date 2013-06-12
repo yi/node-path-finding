@@ -67,10 +67,7 @@ class Grid
     bytePos = index >>> 3
     offset = 7 - index % 8
     byte = @bytes[bytePos]
-    unless Number(walkable)
-      @bytes[bytePos] = byte ^ 1 << offset
-    else
-      @bytes[bytePos] = byte ^ 1 << offset
+    @bytes[bytePos] = byte ^ 1 << offset if walkable isnt @isWalkableAt(x, y)
 
   # @return {uint[]} each uint present x(high 16 bit) and y(low 16 bit)
   # Get the neighbors of the given node.
