@@ -76,7 +76,7 @@ class Grid
   # @param {boolean} allowDiagonal
   # @param {boolean} dontCrossCorners
   # @return {uint[]} a list of walkable neighbors brick loc
-  getNeighbors : (x, y, allowDiagonal=true, dontCrossCorners=false) ->
+  getNeighbors : (x, y, allowDiagonal=false, dontCrossCorners=false) ->
     #console.log  x, y, allowDiagonal, dontCrossCorners
     return null if x < 0 or y < 0 or x >= @width or y >= @height # out bound
     # TODO:

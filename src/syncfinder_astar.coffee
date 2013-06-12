@@ -46,7 +46,7 @@ syncfinder_astar =
     return syncfinder_astar.findPath(start >>> 16 , start & 0xffff, end >>> 16, end & 0xffff, theGrid)
 
   # find a path of giving x, y brick locations
-  findPath : (startX, startY, endX, endY, theGrid) ->
+  findPath : (startX, startY, endX, endY, theGrid, allowDiagonal=false, dontCrossCorners=false) ->
 
     # validate arguments
     if isNaN(startX) or startX < 0 or isNaN(startY) or startY < 0 or isNaN(endX) or endX < 0 or isNaN(endY) or endY < 0 or not theGrid
@@ -87,7 +87,7 @@ syncfinder_astar =
       # get neighbors of the current node
       nodeX = node >>> 16
       nodeY = node & 0xffff
-      neighbors = grid.getNeighbors(nodeX , nodeY)
+      neighbors = grid.getNeighbors(nodeX , nodeY, allowDiagonal, dontCrossCorners)
 
       #console.log "[syncfinder_astar::findPath] process node:#{node}, x:#{nodeX}, y:#{nodeY}, neighbors:#{neighbors}"
 
