@@ -30,6 +30,19 @@ grid = new Grid(width, height, buf)
 # check getNeighbors
 #chkGetNeighbors(width, height, grid)
 
+# isWalkableAt test
+console.log grid.isWalkableAt(0, 0) # should be false
+grid.setWalkableAt(0, 0, yes)
+console.log grid.isWalkableAt(0, 0) # should be true
+grid.setWalkableAt(0, 0, no)
+console.log grid.isWalkableAt(0, 0) # should be false
+
+console.log grid.isWalkableAt(0, 1) # should be true
+grid.setWalkableAt(0, 1, no)
+console.log grid.isWalkableAt(0, 1) # should be false
+grid.setWalkableAt(0, 1, yes)
+console.log grid.isWalkableAt(0, 1) # should be true
+
 path = syncfinder_astar.findPath(1,0,1,4,grid)
 console.log "path:#{path}"
 
