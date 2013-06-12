@@ -34,12 +34,16 @@ grid = new Grid(width, height, buf)
 console.log grid.isWalkableAt(0, 0) # should be false
 grid.setWalkableAt(0, 0, yes)
 console.log grid.isWalkableAt(0, 0) # should be true
+grid.setWalkableAt(0, 0, yes)
+console.log grid.isWalkableAt(0, 0) # should be true
 grid.setWalkableAt(0, 0, no)
 console.log grid.isWalkableAt(0, 0) # should be false
 
 console.log grid.isWalkableAt(0, 1) # should be true
 grid.setWalkableAt(0, 1, no)
 console.log grid.isWalkableAt(0, 1) # should be false
+grid.setWalkableAt(0, 1, yes)
+console.log grid.isWalkableAt(0, 1) # should be true
 grid.setWalkableAt(0, 1, yes)
 console.log grid.isWalkableAt(0, 1) # should be true
 
