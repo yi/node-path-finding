@@ -56,6 +56,22 @@ class Grid
     # ty 2013-01-03
     return not Boolean(byte >>> offset & 1)
 
+  # Set whether the node on the given position is walkable.
+  # NOTE: throws exception if the coordinate is not inside the grid.
+  # @param {number} x - The x coordinate of the node.
+  # @param {number} y - The y coordinate of the node.
+  # @param {boolean} walkable - Whether the position is walkable.
+  setWalkableAt: (x, y, walkable) ->
+    return false if x < 0 or y < 0 or x >= @width or y >= @height # out bound
+    index = (y * @width + x)
+    bytePos = index >>> 3
+    offset = 7 - index % 8
+    byte = @bytes[bytePos]
+    unless Number(walkable)
+      @bytes[bytePos] = byte ^ 1 << offset
+    else
+      @bytes[bytePos] = byte ^ 1 << offset
+
   # @return {uint[]} each uint present x(high 16 bit) and y(low 16 bit)
   # Get the neighbors of the given node.
   #
