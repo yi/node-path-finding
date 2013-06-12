@@ -12,7 +12,7 @@ class Grid
       return null
 
     buf = new Buffer(Math.ceil(width * height / 8))
-    console.log "len:#{buf.length}"
+    #console.log "len:#{buf.length}"
     buf.fill(255) # fill all bits as blocked
 
     for row, y in array2d

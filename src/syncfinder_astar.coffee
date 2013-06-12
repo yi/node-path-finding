@@ -63,7 +63,7 @@ syncfinder_astar =
     locToH = {}
     locToParent = {}
 
-    console.log "[syncfinder_astar::findPath] startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}" #,theGrid:#{theGrid.toString(startLoc, endLoc)}"
+    #console.log "[syncfinder_astar::findPath] startX:#{startX}, startY:#{startY}, endX:#{endX}, endY:#{endY}" #,theGrid:#{theGrid.toString(startLoc, endLoc)}"
 
     # set the `g` and `f` value of the start node to be 0
     locToG[startLoc] = 0
