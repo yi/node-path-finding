@@ -5,7 +5,7 @@ This module is designed to be run on the server side
 
 ## Installation
 
-```
+```bash
 npm install node-pathfinding
 ```
 
@@ -20,7 +20,7 @@ npm install node-pathfinding
 
 ## How To Use
 
-```coffee
+```javascript
 var array2d, buf, grid, height, path, pathfinding, width;
 
 pathfinding = require("node-pathfinding");
