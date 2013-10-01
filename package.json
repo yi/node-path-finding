@@ -1,39 +1,35 @@
 {
   "name": "node-pathfinding",
-  "version": "0.2.3",
-  "description": "a simple server side path finding module for NodeJS, written in CoffeeScript",
-  "homepage": "https://github.com/yi/node-path-finding",
-  "keywords": [
-    "algorithm",
-    "game",
-    "pathfinding"
-  ],
-  "author": "Yi <yi2004@gmail.com>",
-  "main": "./index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "memwatch": ">=0"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/yi/node-path-finding.git"
-  },
-  "licenses": [
+    "version": "0.2.5",
+    "description": "a Node.JS implementation for AStar path finding algorithm. This implementation uses primitive data type (Number and Byte/Buffer) to present location and block data that significantly boots the speed and have a good control on memory consumption",
+    "homepage": "https://github.com/yi/node-path-finding",
+    "keywords": ["algorithm", "game", "astar", "a-start","grid", "graph", "movement", "multiplayer", "pathfinding" ],
+    "author": {
+      "name": "yi",
+      "email": "yi2004@gmail.com",
+      "url": "https://github.com/yi"
+    },
+    "main": "./index.js",
+    "dependencies": {},
+    "devDependencies": {
+      "memwatch": ">=0"
+    },
+    "engines": {
+      "node": ">=0.8.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/yi/node-path-finding.git"
+    },
+    "licenses": [
     {
       "type": "MIT",
       "url": "http://opensource.org/licenses/mit-license.php"
     }
   ],
-  "readmeFilename": "README.md",
-  "gitHead": "3bed7c97aa2361dc1c22524d14b1aef57e5bbd32",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "license": "BSD"
+    "readmeFilename": "README.md",
+    "scripts": {
+      "test": "node tests/sync_astar_continue_test.js "
+    },
+    "license": "MIT"
 }
