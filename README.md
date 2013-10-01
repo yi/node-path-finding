@@ -16,7 +16,7 @@ npm install node-pathfinding
 
 ## Limitations
 - The max size of map is limited to 65535 x 65535
-- Doesn't support negtive location
+- Does not support negtive location
 
 ## How To Use
 
@@ -42,16 +42,16 @@ console.log("path:" + path);
 // print the path
 console.log("path on grid :" + (grid.toString(1 << 16 | 0, 1 << 16 | 4, path)));
 
-/* output:
-path:65536,131072,131073,196609,196610,196611,196612,131076,65540
-path on grid :[Grid(width=4, height=5)]
-Dump: ░=walkable, ▓=blocked
-▓S1░
-░▓23
-░░▓4
-▓▓░5
-▓E76
-*/
+// output:
+// path:65536,131072,131073,196609,196610,196611,196612,131076,65540
+// path on grid :[Grid(width=4, height=5)]
+// Dump: ░=walkable, ▓=blocked
+// ▓S1░
+// ░▓23
+// ░░▓4
+// ▓▓░5
+// ▓E76
+
 ```
 
 ## Glossary
