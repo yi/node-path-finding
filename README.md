@@ -1,7 +1,7 @@
 # Node Path Finding
 
-This is a simple path finding module for NodeJS.
-This module is designed to be run on the server side
+This is a Node.JS implementation for AStar path finding algorithm.
+This implementation uses primitive data types (Number and Byte/Buffer) to present location and block data that significantly improve the speed and have a good control on memory consumption
 
 ## Installation
 
