@@ -1,6 +1,6 @@
 {
   "name": "node-pathfinding",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "a Node.JS implementation for AStar path finding algorithm. This implementation uses primitive data type (Number and Byte/Buffer) to present location and block data that significantly boots the speed and have a good control on memory consumption",
     "homepage": "https://github.com/yi/node-path-finding",
     "keywords": ["algorithm", "game", "astar", "a-start","grid", "graph", "movement", "multiplayer", "pathfinding" ],
